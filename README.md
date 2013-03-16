@@ -1,8 +1,11 @@
-# CacheReplace
+# Rails rendering extension for more server-side html caching
 
-Rails rendering extension for more server-side html caching.
+## Why do I need this?
 
-## Installation
+To squeeze the last drop out of server-side HTML caching in Rails. Use this after you have configured as
+much in-memory caching as possible and it's still not enough.
+
+## Install
 
 Add this line to your Gemfile:
 
@@ -12,19 +15,19 @@ Add this line to a helper file, likely your ApplicationHelper:
 
     include CacheReplace
 
-## Usage
+## Use
 
 This gem allows you to easily cache a partial of static html and replace inner dynamic html. Here is an example
 scenario where this is helpful:
 
 You have some html that would be cached, except for some uncacheable code nested in the DOM. For example:
 
-file.html.haml:
+##### file.html.haml:
 ```
 = render 'container'
 ```
 
-_container.html.haml:
+##### _container.html.haml:
 ```
 .lots
   .of
@@ -32,19 +35,19 @@ _container.html.haml:
       = render 'dynamic'
 ```
 
-_dynamic.html.haml:
+##### _dynamic.html.haml:
 ```
 = complicated_uncacheable_stuff
 ```
 
 Sad times. You can't cache anything without resorting to madness. Oh snap! But you can:
 
-file.html.haml:
+##### file.html.haml:
 ```
 = render_cached 'container', replace: 'dynamic'
 ```
 
-_container.html.haml:
+##### _container.html.haml:
 ```
 - cache "container" do
   .lots
@@ -53,14 +56,14 @@ _container.html.haml:
         = cache_replace_key 'dynamic'
 ```
 
-_dynamic.html.haml:
+##### _dynamic.html.haml:
 ```
 = complicated_uncacheable_stuff
 ```
 
 In the above example, you could also remove the `_dynamic.html.haml` file and do this:
 
-file.html.haml:
+##### file.html.haml:
 ```
 = render_cached 'container', replace: {dynamic: complicated_uncacheable_stuff}
 ```
@@ -69,33 +72,30 @@ file.html.haml:
 
 `render_cached` provides 4 calling styles:
 
-1. Single partial to replace
+#### Single partial to replace
 
 ```ruby
 render_cached "container", replace: "inner"
 ```
 
-2. Array of partials to replace
-
+#### Array of partials to replace
 ```ruby
 render_cached "container", replace: ["inner"]
 ```
 
-3. Map of keys to replace with values
-
+#### Map of keys to replace with values
 ```ruby
 render_cached "container", replace: {special_link: special_link(object)}
 ```
 
-4. Yield to a hash of keys to replace with values
-
+#### Yield to a hash of keys to replace with values
 ```ruby
 render_cached "container" do
   {special_link: special_link(object)}
 end
 ```
 
-## Contributing
+## Contribute
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
