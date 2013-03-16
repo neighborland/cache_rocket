@@ -2,8 +2,8 @@
 
 ## Why do I need this?
 
-To squeeze the last drop out of server-side HTML caching in Rails. Use this after you have configured as
-much in-memory caching as possible and it's still not enough.
+To squeeze the last drop out of server-side HTML caching in Rails. Use this only after you have configured as
+much in-memory caching as possible using standard techniques such as Russian Doll caching.
 
 ## Install
 
