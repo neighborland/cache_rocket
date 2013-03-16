@@ -1,0 +1,5 @@
+require 'test/unit'
+require 'shoulda'
+require 'mocha/setup'
+require 'cache_replace'
+require 'pry'
