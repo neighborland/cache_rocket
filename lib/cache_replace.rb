@@ -45,7 +45,7 @@ module CacheReplace
   # string key containing the partial file name or placeholder key
   # it should return a string that your renderer will never contain
   def cache_replace_key(key)
-    "#{CACHE_FRAGMENT_KEY}#{key.to_s}"
+    raw "#{CACHE_FRAGMENT_KEY}#{key.to_s}"
   end
 
 private
