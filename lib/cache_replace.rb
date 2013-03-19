@@ -40,12 +40,13 @@ module CacheReplace
     raw fragment
   end
 
-  CACHE_FRAGMENT_KEY = '____>>'
+  CACHE_REPLACE_KEY_OPEN  = '<cr '
 
-  # string key containing the partial file name or placeholder key
-  # it should return a string that your renderer will never contain
+  # string key containing the partial file name or placeholder key.
+  # It is a tag that should never be returned to be rendered by the
+  # client, but if so, it will be hidden since CR is not a valid html tag.
   def cache_replace_key(key)
-    raw "#{CACHE_FRAGMENT_KEY}#{key.to_s}"
+    raw "#{CACHE_REPLACE_KEY_OPEN}#{key.to_s}>"
   end
 
 private
