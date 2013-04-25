@@ -9,11 +9,15 @@ much in-memory caching as possible using standard techniques such as Russian Dol
 
 Add this line to your Gemfile:
 
-    gem 'cache_replace'
+```ruby
+gem 'cache_replace'
+```
 
 Add this line to a helper file, likely your ApplicationHelper:
 
-    include CacheReplace
+```ruby
+include CacheReplace
+```
 
 ## Use
 
@@ -23,12 +27,12 @@ scenario where this is helpful:
 You have some html that would be cached, except for some uncacheable code nested in the DOM. For example:
 
 ##### file.html.haml:
-```
+```haml
 = render 'container'
 ```
 
 ##### _container.html.haml:
-```
+```haml
 .lots
   .of
     .htmls
@@ -36,19 +40,19 @@ You have some html that would be cached, except for some uncacheable code nested
 ```
 
 ##### _dynamic.html.haml:
-```
+```haml
 = complicated_uncacheable_stuff
 ```
 
 Sad times. You can't cache anything without resorting to madness. Oh snap! But you can:
 
 ##### file.html.haml:
-```
+```haml
 = render_cached 'container', replace: 'dynamic'
 ```
 
 ##### _container.html.haml:
-```
+```haml
 - cache "container" do
   .lots
     .of
@@ -57,14 +61,14 @@ Sad times. You can't cache anything without resorting to madness. Oh snap! But y
 ```
 
 ##### _dynamic.html.haml:
-```
+``` haml
 = complicated_uncacheable_stuff
 ```
 
 In the above example, you could also remove the `_dynamic.html.haml` file and do this:
 
 ##### file.html.haml:
-```
+```haml
 = render_cached 'container', replace: {dynamic: complicated_uncacheable_stuff}
 ```
 
