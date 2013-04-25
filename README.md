@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/teeparham/cache_replace.png)](https://travis-ci.org/teeparham/cache_replace)
+
 # Rails rendering extension for more server-side html caching
 
 ## Why do I need this?
