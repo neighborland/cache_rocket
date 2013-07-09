@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'shoulda'
+require 'shoulda-context'
 require 'mocha/setup'
 require 'cache_replace'
 require 'pry'

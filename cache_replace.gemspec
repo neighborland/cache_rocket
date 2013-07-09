@@ -24,6 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", ">= 10.0"
   spec.add_development_dependency "test-unit", ">= 2.5"
   spec.add_development_dependency "mocha", ">= 0.13"
-  spec.add_development_dependency "shoulda", ">= 3.3"
+  spec.add_development_dependency "shoulda-context"
   spec.add_development_dependency "pry", ">= 0.9"
 end
