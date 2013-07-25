@@ -4,8 +4,8 @@
 
 ## Why do I need this?
 
-To squeeze the last drop out of server-side HTML caching in Rails. Use this only after you have configured as
-much in-memory caching as possible using standard techniques such as Russian Doll caching.
+To improve fragment caching efficiency in Rails by only caching the things that change. 
+Use this gem after you have configured as much in-memory caching as possible using standard techniques such as Russian Doll caching.
 
 ## Install
 
@@ -24,7 +24,7 @@ include CacheReplace
 ## Use
 
 This gem allows you to easily cache a partial of static html and replace inner dynamic html. Here is an example
-scenario where this is helpful:
+scenario:
 
 You have some html that would be cached, except for some uncacheable code nested in the DOM. For example:
 
@@ -46,7 +46,7 @@ You have some html that would be cached, except for some uncacheable code nested
 = complicated_uncacheable_stuff
 ```
 
-Sad times. You can't cache anything without resorting to madness. Oh snap! But you can:
+In the scenario above, you can't cache anything without resorting to madness. With `cache_replace`, you can:
 
 ##### file.html.haml:
 ```haml
@@ -67,7 +67,7 @@ Sad times. You can't cache anything without resorting to madness. Oh snap! But y
 = complicated_uncacheable_stuff
 ```
 
-In the above example, you could also remove the `_dynamic.html.haml` file and do this:
+In the above example, you could also remove the `_dynamic.html.haml` file like so:
 
 ##### file.html.haml:
 ```haml
@@ -91,13 +91,13 @@ render_cached "container", replace: ["inner"]
 
 #### Map of keys to replace with values
 ```ruby
-render_cached "container", replace: {special_link: special_link(object)}
+render_cached "container", replace: {key_name: a_helper_method(object)}
 ```
 
 #### Yield to a hash of keys to replace with values
 ```ruby
 render_cached "container" do
-  {special_link: special_link(object)}
+  {key_name: a_helper_method(object)}
 end
 ```
 

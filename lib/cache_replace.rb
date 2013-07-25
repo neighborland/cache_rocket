@@ -3,7 +3,8 @@ require 'cache_replace/version'
 module CacheReplace
   # Supports 4 options:
   #
-  # 1. Single partial to replace
+  # 1. Single partial to replace. 
+  #    "inner" is the key name and "_inner.*" is the partial file name.
   #
   #   render_cached "container", replace: "inner"
   #
@@ -13,12 +14,12 @@ module CacheReplace
   #
   # 3. Map of keys to replace with values
   #
-  #   render_cached "container", replace: {special_link: special_link(object)}
+  #   render_cached "container", replace: {key_name: a_helper_method(object)}
   #
   # 4. Yield to a hash of keys to replace with values
   #
   #   render_cached "container" do
-  #     {special_link: special_link(object)}
+  #     {key_name: a_helper_method(object)}
   #   end
   #
   def render_cached(static_partial, options={})
