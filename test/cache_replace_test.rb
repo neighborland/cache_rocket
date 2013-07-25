@@ -46,6 +46,10 @@ class CacheReplaceTest < Test::Unit::TestCase
     should "render with map of keys" do
       assert_equal "Fanny pack keytar viral mustache.", @renderer.render_cached("container", replace: {inner: "keytar"})
     end
+    
+    should "render with map of keys with a nil value" do
+      assert_equal "Fanny pack  viral mustache.", @renderer.render_cached("container", replace: {inner: nil})
+    end    
 
     should "render with hash block" do
       output = @renderer.render_cached("container") do

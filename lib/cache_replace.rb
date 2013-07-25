@@ -53,7 +53,7 @@ private
 
   def replace_from_hash(fragment, hash)
     hash.each do |key, value|
-      fragment.sub! cache_replace_key(key), value
+      fragment.sub! cache_replace_key(key), value.to_s
     end
   end
 end
