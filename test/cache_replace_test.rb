@@ -57,5 +57,17 @@ class CacheReplaceTest < Test::Unit::TestCase
       end
       assert_equal "Fanny pack keytar viral mustache.", output
     end
+
+    should "replace every instance of key in inner partial" do
+      @renderer.stubs(:render).with("container", {}).
+        returns "#{@renderer.cache_replace_key('inner')} #{@renderer.cache_replace_key('inner')} viral mustache."
+      assert_equal "quinoa hoodie quinoa hoodie viral mustache.", @renderer.render_cached("container", replace: "inner")
+    end
+
+    should "replace every instance of the keys with hash values" do
+      @renderer.stubs(:render).with("container", {}).
+        returns "I like #{@renderer.cache_replace_key('beer')}, #{@renderer.cache_replace_key('beer')} and #{@renderer.cache_replace_key('food')}."
+      assert_equal "I like stout, stout and chips.", @renderer.render_cached("container", replace: {food: "chips", beer: 'stout'})
+    end
   end
 end

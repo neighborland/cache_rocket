@@ -34,7 +34,7 @@ module CacheReplace
     else
       replace = *replace
       replace.each do |key|
-        fragment.sub! cache_replace_key(key), render(key, options)
+        fragment.gsub! cache_replace_key(key), render(key, options)
       end
     end
 
@@ -54,7 +54,7 @@ private
 
   def replace_from_hash(fragment, hash)
     hash.each do |key, value|
-      fragment.sub! cache_replace_key(key), value.to_s
+      fragment.gsub! cache_replace_key(key), value.to_s
     end
   end
 end
