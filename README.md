@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/cache_replace.png)](http://badge.fury.io/rb/cache_replace)
 [![Build Status](https://api.travis-ci.org/teeparham/cache_replace.png)](https://travis-ci.org/teeparham/cache_replace)
 [![Code Climate](https://codeclimate.com/github/teeparham/cache_replace.png)](https://codeclimate.com/github/teeparham/cache_replace)
 
