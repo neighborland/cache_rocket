@@ -1,6 +1,12 @@
-[![Gem Version](https://badge.fury.io/rb/cache_replace.png)](http://badge.fury.io/rb/cache_replace)
-[![Build Status](https://api.travis-ci.org/teeparham/cache_replace.png)](https://travis-ci.org/teeparham/cache_replace)
-[![Code Climate](https://codeclimate.com/github/teeparham/cache_replace.png)](https://codeclimate.com/github/teeparham/cache_replace)
+[![Gem Version](https://badge.fury.io/rb/cache_replace.png)][gem]
+[![Build Status](https://api.travis-ci.org/teeparham/cache_replace.png)][build]
+[![Coverage Status](https://coveralls.io/repos/teeparham/cache_replace/badge.png)][coverage]
+[![Code Climate](https://codeclimate.com/github/teeparham/cache_replace.png)][climate]
+
+[gem]: http://badge.fury.io/rb/cache_replace
+[build]: https://travis-ci.org/teeparham/cache_replace
+[coverage]: https://coveralls.io/r/teeparham/cache_replace
+[climate]: https://codeclimate.com/github/teeparham/cache_replace
 
 # Rails rendering extension for more server-side html caching
 
