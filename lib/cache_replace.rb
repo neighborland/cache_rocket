@@ -1,6 +1,8 @@
 require 'cache_replace/version'
 
 module CacheReplace
+  ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."
+  
   # Supports 4 options:
   #
   # 1. Single partial to replace. 
@@ -22,14 +24,15 @@ module CacheReplace
   #     {key_name: a_helper_method(object)}
   #   end
   #
-  def render_cached(static_partial, options={})
+  def render_cached(partial, options={})
     replace = options.delete(:replace)
-    fragment = render(static_partial, options)
+    fragment = render(partial, options)
 
     case replace
     when Hash
       replace_from_hash fragment, replace
     when NilClass
+      raise ArgumentError.new(ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
       replace_from_hash fragment, yield
     else
       replace = *replace

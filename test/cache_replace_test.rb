@@ -69,5 +69,12 @@ class CacheReplaceTest < Test::Unit::TestCase
         returns "I like #{@renderer.cache_replace_key('beer')}, #{@renderer.cache_replace_key('beer')} and #{@renderer.cache_replace_key('food')}."
       assert_equal "I like stout, stout and chips.", @renderer.render_cached("container", replace: {food: "chips", beer: 'stout'})
     end
+    
+    should "raise ArgumentError with invalid syntax" do
+      @renderer.stubs(:render).with("container").returns("")
+      assert_raise(ArgumentError) do
+        @renderer.render_cached("container")
+      end
+    end
   end
 end
