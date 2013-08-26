@@ -3,7 +3,7 @@ require 'cache_replace/version'
 module CacheReplace
   ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."
   
-  # Supports 4 options:
+  # Supports 5 options:
   #
   # 1. Single partial to replace. 
   #    "inner" is the key name and "_inner.*" is the partial file name.
@@ -24,13 +24,22 @@ module CacheReplace
   #     {key_name: a_helper_method(object)}
   #   end
   #
+  # 5. Render a collection with Procs for replace values.
+  #
+  #   render_cached "partial", collection: objects, replace: { key_name: ->(object){a_method(object)} }
+  #
   def render_cached(partial, options={})
     replace = options.delete(:replace)
+    collection = options.delete(:collection)
     fragment = render(partial, options)
 
     case replace
     when Hash
-      replace_from_hash fragment, replace
+      if collection
+        fragment = replace_collection(fragment, collection, replace)
+      else
+        replace_from_hash fragment, replace
+      end
     when NilClass
       raise ArgumentError.new(ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
       replace_from_hash fragment, yield
@@ -59,5 +68,23 @@ private
     hash.each do |key, value|
       fragment.gsub! cache_replace_key(key), value.to_s
     end
+  end
+
+  def replace_item_hash(fragment, item, hash)
+    hash.each do |key, value|
+      fragment.gsub! cache_replace_key(key), value.call(item)
+    end
+  end
+
+  def replace_collection(fragment, collection, replace)
+    html = ""
+
+    collection.each do |item|
+      item_fragment = fragment.dup
+      replace_item_hash(item_fragment, item, replace)
+      html << item_fragment
+    end
+
+    html
   end
 end
