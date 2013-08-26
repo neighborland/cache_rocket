@@ -1,0 +1,48 @@
+module CacheReplace
+  class Fragment
+    include Key
+
+    attr_accessor :value
+
+    def initialize(value)
+      self.value = value
+    end
+
+    def to_s
+      value
+    end
+
+    def gsub!(key, value)
+      self.value.gsub! key, value
+    end
+
+    def replace_from_hash(hash)
+      hash.each do |key, value|
+        gsub! cache_replace_key(key), value.to_s
+      end
+    end
+
+    def replace_collection(collection, replace_hash)
+      html = ""
+
+      collection.each do |item|
+        html << replace_item_hash(item, replace_hash)
+      end
+
+      self.value = html
+    end
+
+  private
+
+    def replace_item_hash(item, hash)
+      item_fragment = self.value.dup
+
+      hash.each do |key, value|
+        item_fragment.gsub! cache_replace_key(key), value.call(item)
+      end
+
+      item_fragment
+    end
+
+  end
+end

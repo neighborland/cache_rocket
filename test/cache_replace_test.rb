@@ -3,11 +3,6 @@ require 'test_helper'
 class CacheReplaceTest < Test::Unit::TestCase
   class FakeRenderer
     include CacheReplace
-
-    # mock ActionView::Helpers::OutputSafetyHelper
-    def raw(value)
-      value
-    end
   end
 
   setup do
