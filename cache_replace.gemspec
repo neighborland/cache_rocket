@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CacheReplace::VERSION
   spec.authors       = ["Tee Parham"]
   spec.email         = ["tee@neighborland.com"]
-  spec.description   = %q{Rails rendering extension for more server-side html caching}
-  spec.summary       = %q{Rails rendering extension for more server-side html caching}
+  spec.description   = %q{Rails rendering extension for server-side html caching}
+  spec.summary       = %q{Rails rendering extension for server-side html caching}
   spec.homepage      = "https://github.com/teeparham/cache_replace"
   spec.license       = "MIT"
 
