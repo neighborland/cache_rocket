@@ -3,11 +3,6 @@ require 'test_helper'
 class CacheReplaceTest < Test::Unit::TestCase
   class FakeRenderer
     include CacheReplace
-
-    # mock ActionView::Helpers::OutputSafetyHelper
-    def raw(value)
-      value
-    end
   end
 
   setup do
@@ -40,7 +35,9 @@ class CacheReplaceTest < Test::Unit::TestCase
       @renderer.stubs(:render).with("container", {}).
         returns "#{@renderer.cache_replace_key('inner')} #{@renderer.cache_replace_key('other')} viral mustache."
       @renderer.stubs(:render).with("other", {}).returns "high life"
-      assert_equal "quinoa hoodie high life viral mustache.", @renderer.render_cached("container", replace: ["inner", "other"])
+
+      assert_equal "quinoa hoodie high life viral mustache.",
+        @renderer.render_cached("container", replace: ["inner", "other"])
     end
 
     should "render with map of keys" do
@@ -61,13 +58,26 @@ class CacheReplaceTest < Test::Unit::TestCase
     should "replace every instance of key in inner partial" do
       @renderer.stubs(:render).with("container", {}).
         returns "#{@renderer.cache_replace_key('inner')} #{@renderer.cache_replace_key('inner')} viral mustache."
-      assert_equal "quinoa hoodie quinoa hoodie viral mustache.", @renderer.render_cached("container", replace: "inner")
+
+      assert_equal "quinoa hoodie quinoa hoodie viral mustache.",
+        @renderer.render_cached("container", replace: "inner")
     end
 
     should "replace every instance of the keys with hash values" do
       @renderer.stubs(:render).with("container", {}).
         returns "I like #{@renderer.cache_replace_key('beer')}, #{@renderer.cache_replace_key('beer')} and #{@renderer.cache_replace_key('food')}."
-      assert_equal "I like stout, stout and chips.", @renderer.render_cached("container", replace: {food: "chips", beer: 'stout'})
+
+      assert_equal "I like stout, stout and chips.",
+         @renderer.render_cached("container", replace: {food: "chips", beer: 'stout'})
+    end
+
+    should "replace collection with Proc in replace key" do
+      def dog_name(dog) dog end
+      @renderer.stubs(:render).with("partial", {}).returns "Hi #{@renderer.cache_replace_key(:dog)}."
+      dogs = %w[Snoop Boo]
+
+      assert_equal "Hi Snoop.Hi Boo.",
+        @renderer.render_cached("partial", collection: dogs, replace: {dog: ->(dog){dog_name(dog)} })
     end
     
     should "raise ArgumentError with invalid syntax" do

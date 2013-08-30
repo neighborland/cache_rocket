@@ -1,9 +1,14 @@
+require 'active_support/core_ext/string'
+require 'cache_replace/key'
+require 'cache_replace/fragment'
 require 'cache_replace/version'
 
 module CacheReplace
+  include Key
+
   ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."
   
-  # Supports 4 options:
+  # Supports 5 options:
   #
   # 1. Single partial to replace. 
   #    "inner" is the key name and "_inner.*" is the partial file name.
@@ -24,16 +29,26 @@ module CacheReplace
   #     {key_name: a_helper_method(object)}
   #   end
   #
+  # 5. Render a collection with Procs for replace values.
+  #
+  #   render_cached "partial", collection: objects, replace: { key_name: ->(object){a_method(object)} }
+  #
   def render_cached(partial, options={})
     replace = options.delete(:replace)
-    fragment = render(partial, options)
+    collection = options.delete(:collection)
+
+    fragment = Fragment.new(render(partial, options))
 
     case replace
     when Hash
-      replace_from_hash fragment, replace
+      if collection
+        fragment.replace_collection collection, replace
+      else
+        fragment.replace_from_hash replace
+      end
     when NilClass
       raise ArgumentError.new(ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
-      replace_from_hash fragment, yield
+      fragment.replace_from_hash yield
     else
       replace = *replace
       replace.each do |key|
@@ -41,23 +56,7 @@ module CacheReplace
       end
     end
 
-    raw fragment
+    fragment.to_s.html_safe
   end
 
-  CACHE_REPLACE_KEY_OPEN  = '<cr '
-
-  # string key containing the partial file name or placeholder key.
-  # It is a tag that should never be returned to be rendered by the
-  # client, but if so, it will be hidden since CR is not a valid html tag.
-  def cache_replace_key(key)
-    raw "#{CACHE_REPLACE_KEY_OPEN}#{key.to_s}>"
-  end
-
-private
-
-  def replace_from_hash(fragment, hash)
-    hash.each do |key, value|
-      fragment.gsub! cache_replace_key(key), value.to_s
-    end
-  end
 end
