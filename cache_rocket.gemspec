@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "actionpack", ">= 3.2"
 
-  spec.add_development_dependency "bundler", ">= 1.3"
   spec.add_development_dependency "rake", ">= 10.0"
   spec.add_development_dependency "test-unit", ">= 2.5"
   spec.add_development_dependency "mocha", ">= 0.13"
