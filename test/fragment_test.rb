@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module CacheReplace
+module CacheRocket
   class FragmentTest < Test::Unit::TestCase
     context "#to_s" do
       should "equal value" do

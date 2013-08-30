@@ -1,9 +1,9 @@
 require 'active_support/core_ext/string'
-require 'cache_replace/key'
-require 'cache_replace/fragment'
-require 'cache_replace/version'
+require 'cache_rocket/key'
+require 'cache_rocket/fragment'
+require 'cache_rocket/version'
 
-module CacheReplace
+module CacheRocket
   include Key
 
   ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."

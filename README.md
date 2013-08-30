@@ -1,32 +1,32 @@
-[![Gem Version](https://badge.fury.io/rb/cache_replace.png)][gem]
-[![Build Status](https://api.travis-ci.org/teeparham/cache_replace.png)][build]
-[![Coverage Status](https://coveralls.io/repos/teeparham/cache_replace/badge.png)][coverage]
-[![Code Climate](https://codeclimate.com/github/teeparham/cache_replace.png)][climate]
+[![Gem Version](https://badge.fury.io/rb/cache_rocket.png)][gem]
+[![Build Status](https://api.travis-ci.org/teeparham/cache_rocket.png)][build]
+[![Coverage Status](https://coveralls.io/repos/teeparham/cache_rocket.badge.png)][coverage]
+[![Code Climate](https://codeclimate.com/github/teeparham/cache_rocket.png)][climate]
 
-[gem]: http://badge.fury.io/rb/cache_replace
-[build]: https://travis-ci.org/teeparham/cache_replace
-[coverage]: https://coveralls.io/r/teeparham/cache_replace
-[climate]: https://codeclimate.com/github/teeparham/cache_replace
+[gem]: http://badge.fury.io/rb/cache_rocket
+[build]: https://travis-ci.org/teeparham/cache_rocket
+[coverage]: https://coveralls.io/r/teeparham/cache_rocket
+[climate]: https://codeclimate.com/github/teeparham/cache_rocket
 
-# Rails rendering extension for more server-side html caching
+# Rails rendering extension for server-side html caching
 
 ## Why do I need this?
 
-To improve fragment caching efficiency in Rails by only caching the things that change. 
-Use this gem after you have configured as much in-memory caching as possible using standard techniques such as Russian Doll caching.
+To improve fragment caching efficiency in Rails by only caching the things that change.
+CacheRocket may be used in with other Rails caching strategies such as Russian Doll caching.
 
 ## Install
 
 Add this line to your Gemfile:
 
 ```ruby
-gem 'cache_replace'
+gem 'cache_rocket'
 ```
 
 Add this line to a helper file, likely your ApplicationHelper:
 
 ```ruby
-include CacheReplace
+include CacheRocket
 ```
 
 ## Use
@@ -54,7 +54,7 @@ You have some html that would be cached, except for some uncacheable code nested
 = complicated_uncacheable_stuff
 ```
 
-In the scenario above, you can't cache anything without resorting to madness. With `cache_replace`, you can:
+In the scenario above, you can't cache anything. With `cache_rocket`, you can:
 
 ##### file.html.haml:
 ```haml

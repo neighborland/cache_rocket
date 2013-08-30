@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module CacheReplace
+module CacheRocket
   class KeyTest < Test::Unit::TestCase
 
     context "#cache_replace_key" do
@@ -10,7 +10,7 @@ module CacheReplace
         end
 
         key = KeyFake.new
-        assert_equal CacheReplace::Key::CACHE_REPLACE_KEY_OPEN + "some/thing>", key.cache_replace_key("some/thing")
+        assert_equal CacheRocket::Key::CACHE_REPLACE_KEY_OPEN + "some/thing>", key.cache_replace_key("some/thing")
       end
     end
 

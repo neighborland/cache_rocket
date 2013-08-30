@@ -1,4 +1,4 @@
-module CacheReplace
+module CacheRocket
   module Key
     CACHE_REPLACE_KEY_OPEN  = '<cr '
 

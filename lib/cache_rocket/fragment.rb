@@ -1,4 +1,4 @@
-module CacheReplace
+module CacheRocket
   class Fragment
     include Key
 

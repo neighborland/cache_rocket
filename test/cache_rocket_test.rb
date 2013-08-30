@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class CacheReplaceTest < Test::Unit::TestCase
+class CacheRocketTest < Test::Unit::TestCase
   class FakeRenderer
-    include CacheReplace
+    include CacheRocket
   end
 
   setup do
@@ -11,7 +11,7 @@ class CacheReplaceTest < Test::Unit::TestCase
 
   context "#cache_replace_key" do
     should "return key with prefix" do
-      assert_equal CacheReplace::CACHE_REPLACE_KEY_OPEN + "some/thing>", @renderer.cache_replace_key("some/thing")
+      assert_equal CacheRocket::CACHE_REPLACE_KEY_OPEN + "some/thing>", @renderer.cache_replace_key("some/thing")
     end
   end
 
