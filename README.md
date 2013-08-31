@@ -29,10 +29,10 @@ include CacheRocket
 
 ## Use
 
-This gem allows you to easily cache a partial of static html and replace inner dynamic html. Here is an example
+This gem allows you to cache a partial of static html and replace inner dynamic html. Here is an example
 scenario:
 
-You have some html that would be cached, except for some uncacheable code nested in the DOM. For example:
+You have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM. For example:
 
 ##### file.html.haml:
 ```haml
@@ -77,12 +77,12 @@ In the above example, you could also remove the `_dynamic.html.haml` file like s
 
 ##### file.html.haml:
 ```haml
-= render_cached 'container', replace: {dynamic: complicated_uncacheable_stuff}
+= render_cached 'container', replace: { dynamic: complicated_uncacheable_stuff }
 ```
 
 ## Options
 
-`render_cached` provides 4 calling styles:
+`render_cached` provides several calling styles:
 
 #### Single partial to replace
 
@@ -92,18 +92,31 @@ render_cached "container", replace: "inner"
 
 #### Array of partials to replace
 ```ruby
-render_cached "container", replace: ["inner"]
+render_cached "container", replace: ["inner", "footer"]
 ```
 
-#### Map of keys to replace with values
+#### Hash of keys to replace with values
 ```ruby
-render_cached "container", replace: {key_name: a_helper_method(object)}
+render_cached "container", replace: { key_name: a_helper_method(object) }
 ```
 
-#### Yield to a hash of keys to replace with values
+#### Block containing a hash of keys to replace with values
 ```ruby
 render_cached "container" do
-  {key_name: a_helper_method(object)}
+  { key_name: a_helper_method(object) }
+end
+```
+
+#### Render a collection with hash of keys, using a Proc for each collection item
+```ruby
+render_cached "container", collection: objects,
+  replace: { key_name: ->(object){ a_helper_method(object) } }
+```
+
+#### Render a collection with block syntax
+```ruby
+render_cached "container", collection: objects do
+  { key_name: ->(object){ a_helper_method(object) } }
 end
 ```
 
