@@ -79,7 +79,19 @@ class CacheRocketTest < Test::Unit::TestCase
       assert_equal "Hi Snoop.Hi Boo.",
         @renderer.render_cached("partial", collection: dogs, replace: {dog: ->(dog){dog_name(dog)} })
     end
-    
+
+    should "replace collection using hash block with Proc" do
+      def dog_name(dog) dog end
+      @renderer.stubs(:render).with("partial", {}).returns "Hi #{@renderer.cache_replace_key(:dog)}."
+      dogs = %w[Snoop Boo]
+
+      rendered = @renderer.render_cached("partial", collection: dogs) do
+        { dog: ->(dog){dog_name(dog)} }
+      end
+
+      assert_equal "Hi Snoop.Hi Boo.", rendered
+    end
+
     should "raise ArgumentError with invalid syntax" do
       @renderer.stubs(:render).with("container").returns("")
       assert_raise(ArgumentError) do

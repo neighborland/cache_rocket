@@ -34,24 +34,20 @@ module CacheRocket
   #   render_cached "partial", collection: objects, replace: { key_name: ->(object){a_method(object)} }
   #
   def render_cached(partial, options={})
-    replace = options.delete(:replace)
+    replace_hash = options.delete(:replace)
     collection = options.delete(:collection)
 
     fragment = Fragment.new(render(partial, options))
 
-    case replace
+    case replace_hash
     when Hash
-      if collection
-        fragment.replace_collection collection, replace
-      else
-        fragment.replace_from_hash replace
-      end
+      fragment.replace replace_hash, collection
     when NilClass
       raise ArgumentError.new(ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
-      fragment.replace_from_hash yield
+      fragment.replace yield, collection
     else
-      replace = *replace
-      replace.each do |key|
+      key_array = *replace_hash
+      key_array.each do |key|
         fragment.gsub! cache_replace_key(key), render(key, options)
       end
     end

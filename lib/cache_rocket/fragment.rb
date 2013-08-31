@@ -16,6 +16,16 @@ module CacheRocket
       self.value.gsub! key, value
     end
 
+    def replace(hash, collection)
+      if collection
+        replace_collection collection, hash
+      else
+        replace_from_hash hash
+      end
+    end
+
+  private
+
     def replace_from_hash(hash)
       hash.each do |key, value|
         gsub! cache_replace_key(key), value.to_s
@@ -31,8 +41,6 @@ module CacheRocket
 
       self.value = html
     end
-
-  private
 
     def replace_item_hash(item, hash)
       item_fragment = self.value.dup
