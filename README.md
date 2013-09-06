@@ -8,13 +8,13 @@
 [coverage]: https://coveralls.io/r/teeparham/cache_rocket
 [climate]: https://codeclimate.com/github/teeparham/cache_rocket
 
-# Rails rendering extension for server-side html caching
+## Rails rendering extension for server-side html caching
 
 CacheRocket improves fragment caching efficiency in Rails by caching more generic html fragments and allowing
 the contents of the cached fragments to be replaced with dynamic content. 
 CacheRocket is a technique that may be used with other Rails caching strategies such as Russian Doll caching.
 
-## Install
+### Install
 
 Add this line to your Gemfile:
 
@@ -28,7 +28,7 @@ Add this line to a helper file, likely your ApplicationHelper:
 include CacheRocket
 ```
 
-## Use
+### Use
 
 This gem allows you to cache a partial of static html and replace inner dynamic html.
 
@@ -82,7 +82,7 @@ In the above example, you could also remove the `_dynamic.html.haml` file like s
 = render_cached 'container', replace: { dynamic: complicated_uncacheable_stuff }
 ```
 
-## Options
+### Options
 
 `render_cached` provides several calling styles:
 
@@ -122,7 +122,7 @@ render_cached "container", collection: objects do
 end
 ```
 
-## Contribute
+### Contribute
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
