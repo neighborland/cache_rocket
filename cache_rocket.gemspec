@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["tee@neighborland.com"]
   spec.description   = %q{Rails rendering extension for server-side html caching}
   spec.summary       = %q{Rails rendering extension for server-side html caching}
-  spec.homepage      = "https://github.com/teeparham/cache_rocket"
+  spec.homepage      = "https://github.com/neighborland/cache_rocket"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

@@ -1,4 +1,4 @@
-Copyright (c) 2013 Tee Parham
+Copyright (c) 2013 Neighborland, Inc.
 
 MIT License
 

@@ -1,12 +1,12 @@
 [![Gem Version](https://badge.fury.io/rb/cache_rocket.png)][gem]
-[![Build Status](https://api.travis-ci.org/teeparham/cache_rocket.png)][build]
-[![Coverage Status](https://coveralls.io/repos/teeparham/cache_rocket/badge.png)][coverage]
-[![Code Climate](https://codeclimate.com/github/teeparham/cache_rocket.png)][climate]
+[![Build Status](https://api.travis-ci.org/neighborland/cache_rocket.png)][build]
+[![Coverage Status](https://coveralls.io/repos/neighborland/cache_rocket/badge.png)][coverage]
+[![Code Climate](https://codeclimate.com/github/neighborland/cache_rocket.png)][climate]
 
 [gem]: http://badge.fury.io/rb/cache_rocket
-[build]: https://travis-ci.org/teeparham/cache_rocket
-[coverage]: https://coveralls.io/r/teeparham/cache_rocket
-[climate]: https://codeclimate.com/github/teeparham/cache_rocket
+[build]: https://travis-ci.org/neighborland/cache_rocket
+[coverage]: https://coveralls.io/r/neighborland/cache_rocket
+[climate]: https://codeclimate.com/github/neighborland/cache_rocket
 
 ## Rails rendering extension for server-side html caching
 
