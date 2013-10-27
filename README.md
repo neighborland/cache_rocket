@@ -30,7 +30,7 @@ include CacheRocket
 
 ### Use
 
-This gem allows you to cache a partial of static html and replace inner dynamic html.
+This gem allows you to cache a fragment of static html and replace inner dynamic html.
 
 Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM. 
 For example:
@@ -63,7 +63,7 @@ with `render_cached` in `file`, specify the partial to replace in `container`, a
 
 ##### _container.html.haml:
 ```haml
-- cache "container" do
+- cache 'container' do
   .lots
     .of
       .htmls
@@ -89,43 +89,101 @@ In the above example, you could also remove the `_dynamic.html.haml` file like s
 #### Single partial to replace
 
 ```ruby
-render_cached "container", replace: "inner"
+render_cached 'container', replace: 'inner'
 ```
 
 #### Array of partials to replace
 ```ruby
-render_cached "container", replace: ["inner", "footer"]
+render_cached 'container', replace: ['inner', 'footer']
 ```
 
 #### Hash of keys to replace with values
 ```ruby
-render_cached "container", replace: { key_name: a_helper_method(object) }
+render_cached 'container', replace: { key_name: a_helper_method(object) }
 ```
 
 #### Block containing a hash of keys to replace with values
 ```ruby
-render_cached "container" do
+render_cached 'container' do
   { key_name: a_helper_method(object) }
 end
 ```
 
 #### Render a collection with hash of keys, using a Proc for each collection item
 ```ruby
-render_cached "container", collection: objects,
+render_cached 'container', collection: objects,
   replace: { key_name: ->(object){ a_helper_method(object) } }
 ```
 
 #### Render a collection with block syntax
 ```ruby
-render_cached "container", collection: objects do
+render_cached 'container', collection: objects do
   { key_name: ->(object){ a_helper_method(object) } }
 end
 ```
 
-### Contribute
+### YMMV
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+`cache_rocket` is not magic. It should not be used in all situations.
+Benchmark your page load times before and after to see if it helps.
+
+### Benefits
+
+#### More server-side caching
+
+see example above
+
+#### Use far less memory
+
+Typically, one would key the `users/bio` partial on the `user` object like so:
+
+##### users/bio.haml:
+```haml
+.lots-of-htmls
+  = user.bio
+```
+
+```haml
+- cache(user) do
+  = render 'users/bio'
+```
+
+This means with 1000 users, there are 1000 cached items. This can use a lot of memory.
+Instead we can cache the `users/bio` partial once and replace the content we need using
+`cache_replace`. With 1000 users, we use 1/1000th the memory.
+
+##### users/bio.haml:
+```haml
+- cache('users/bio') do
+  .lots-of-htmls
+    = cache_replace_key :bio
+```
+
+```haml
+= render_cached 'users/bio', replace {bio: user.bio}
+```
+
+#### Simpler cache keys
+
+If you have a cache key containing multiple models, it will generally be very inefficient:
+```haml
+- cache(user, other_user) do
+  = render 'common_interests'
+```
+
+If the cached content is rarely retrieved, `cache_replace` can help:
+
+```haml
+- cache('common_interests') do
+  .htmls
+    = cache_replace_key :something
+```
+
+```haml
+= render 'common_interests', replace {something: 'common_interests/inner'}
+```
+
+#### Faster first page loads
+
+By caching common html, you ensure that you will render cached content the first time a model-dependent
+fragment is rendered. See the `Use far less memory` section above for an example.
