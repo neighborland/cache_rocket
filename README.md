@@ -10,8 +10,9 @@
 
 ## Rails rendering extension for server-side html caching
 
-CacheRocket improves fragment caching efficiency in Rails by caching more generic html fragments and allowing
-the contents of the cached fragments to be replaced with dynamic content. 
+CacheRocket improves fragment caching efficiency in Rails. 
+CacheRocket allows caching more generic html fragments and allowing the contents of the cached fragments 
+to be replaced with dynamic content. 
 CacheRocket is a technique that may be used with other Rails caching strategies such as Russian Doll caching.
 
 ### Install
@@ -30,9 +31,9 @@ include CacheRocket
 
 ### Use
 
-This gem allows you to cache a fragment of static html and replace inner dynamic html.
+This gem allows you to cache a fragment of html and replace inner html. You cache the donut and replace the donut hole.
 
-Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM. 
+Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM.
 For example:
 
 ##### file.html.haml:
