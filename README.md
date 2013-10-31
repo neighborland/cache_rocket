@@ -161,7 +161,7 @@ Instead we can cache the `users/bio` partial once and replace the content we nee
 ```
 
 ```haml
-= render_cached 'users/bio', replace {bio: user.bio}
+= render_cached 'users/bio', replace: {bio: user.bio}
 ```
 
 #### Simpler cache keys
@@ -181,7 +181,7 @@ If the cached content is rarely retrieved, `cache_replace` can help:
 ```
 
 ```haml
-= render 'common_interests', replace {something: 'common_interests/inner'}
+= render 'common_interests', replace: {something: 'common_interests/inner'}
 ```
 
 #### Faster first page loads
