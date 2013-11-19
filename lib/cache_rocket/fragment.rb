@@ -45,8 +45,8 @@ module CacheRocket
     def replace_item_hash(item, hash)
       item_fragment = self.value.dup
 
-      hash.each do |key, value|
-        item_fragment.gsub! cache_replace_key(key), value.call(item)
+      hash.each do |key, proc|
+        item_fragment.gsub! cache_replace_key(key), proc.call(item)
       end
 
       item_fragment
