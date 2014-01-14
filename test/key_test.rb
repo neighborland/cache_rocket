@@ -1,10 +1,10 @@
 require 'test_helper'
 
 module CacheRocket
-  class KeyTest < Test::Unit::TestCase
+  class KeyTest < MiniTest::Spec
 
-    context "#cache_replace_key" do
-      should "return key with prefix" do
+    describe "#cache_replace_key" do
+      it "return key with prefix" do
         class KeyFake
           include Key
         end

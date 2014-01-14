@@ -1,29 +1,29 @@
 require 'test_helper'
 
 module CacheRocket
-  class FragmentTest < Test::Unit::TestCase
-    context "#to_s" do
-      should "equal value" do
+  class FragmentTest < MiniTest::Spec
+    describe "#to_s" do
+      it "equal value" do
         assert_equal "yo", Fragment.new("yo").to_s
       end
     end
 
-    context "#gsub!" do
-      should "substitute value" do
+    describe "#gsub!" do
+      it "substitute value" do
         fragment = Fragment.new("hello there, hello.")
         assert_equal "yo there, yo.", fragment.gsub!("hello", "yo")
       end
     end
 
-    context "#replace" do
-      should "replace cache keys from hash" do
+    describe "#replace" do
+      it "replace cache keys from hash" do
         cr_key = Fragment.new(nil).cache_replace_key(:xx)
         fragment = Fragment.new("hey #{cr_key} hey.")
         fragment.replace({xx: "yo"}, nil)
         assert_equal "hey yo hey.", fragment.value
       end
 
-      should "replace collection with Proc" do
+      it "replace collection with Proc" do
         def last5(object)
           object.last(5)
         end
