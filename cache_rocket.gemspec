@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- {test}/*`.split("\n")
   spec.require_paths = ["lib"]
 
+  spec.required_ruby_version = ">= 1.9.3"
+
   spec.add_dependency "actionpack", ">= 3.2"
 
   spec.add_development_dependency "rake", ">= 10.0"
