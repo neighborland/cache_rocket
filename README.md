@@ -46,10 +46,10 @@ For example:
 .lots
   .of
     .htmls
-      = render 'dynamic'
+      = render 'inner'
 ```
 
-##### _dynamic.html.haml:
+##### _inner.html.haml:
 ```haml
 = complicated_uncacheable_stuff
 ```
@@ -59,7 +59,7 @@ with `render_cached` in `file`, specify the partial to replace in `container`, a
 
 ##### file.html.haml:
 ```haml
-= render_cached 'container', replace: 'dynamic'
+= render_cached 'container', replace: 'inner'
 ```
 
 ##### _container.html.haml:
@@ -68,19 +68,19 @@ with `render_cached` in `file`, specify the partial to replace in `container`, a
   .lots
     .of
       .htmls
-        = cache_replace_key 'dynamic'
+        = cache_replace_key 'inner'
 ```
 
-##### _dynamic.html.haml:
+##### _inner.html.haml:
 ``` haml
 = complicated_uncacheable_stuff
 ```
 
-In the above example, you could also remove the `_dynamic.html.haml` file like so:
+In the above example, you could also remove the `_inner.html.haml` file like so:
 
 ##### file.html.haml:
 ```haml
-= render_cached 'container', replace: { dynamic: complicated_uncacheable_stuff }
+= render_cached 'container', replace: { inner: complicated_uncacheable_stuff }
 ```
 
 ### Options
@@ -188,3 +188,8 @@ If the cached content is rarely retrieved, `cache_replace` can help:
 
 By caching common html, you ensure that you will render cached content the first time a model-dependent
 fragment is rendered. See the `Use far less memory` section above for an example.
+
+### References
+
+* Slides from Boulder Ruby presentation: http://www.slideshare.net/teeparham/rails-html-fragment-caching-with-cache-rocket
+* Rails cache benchmark test app: https://github.com/teeparham/cache_benchmark
