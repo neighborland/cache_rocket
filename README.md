@@ -76,16 +76,25 @@ with `render_cached` in `file`, specify the partial to replace in `container`, a
 = complicated_uncacheable_stuff
 ```
 
-In the above example, you could also remove the `_inner.html.haml` file like so:
+In this example, you could remove the `_inner.html.haml` file altogether, like so:
 
 ##### file.html.haml:
 ```haml
 = render_cached 'container', replace: { inner: complicated_uncacheable_stuff }
 ```
 
+##### _container.html.haml:
+```haml
+- cache 'container' do
+  .lots
+    .of
+      .htmls
+        = cache_replace_key 'inner'
+```
+
 ### Options
 
-`render_cached` provides several calling styles:
+`render_cached` supports several styles of arguments:
 
 #### Single partial to replace
 
@@ -132,7 +141,7 @@ Benchmark your page load times before and after to see if it helps.
 
 #### More server-side caching
 
-see example above
+See the example above.
 
 #### Use far less memory
 
@@ -140,16 +149,16 @@ Typically, one would key the `users/bio` partial on the `user` object like so:
 
 ##### users/bio.haml:
 ```haml
-.lots-of-htmls
-  = user.bio
+- cache [user, 'bio'] do
+  .lots-of-htmls
+    = user.bio
 ```
 
 ```haml
-- cache(user) do
-  = render 'users/bio'
+= render 'users/bio'
 ```
 
-This means with 1000 users, there are 1000 cached items. This can use a lot of memory.
+With 1000 users, there are 1000 cached items. This can use a lot of memory.
 Instead we can cache the `users/bio` partial once and replace the content we need using
 `cache_replace`. With 1000 users, we use 1/1000th the memory.
 
@@ -161,7 +170,7 @@ Instead we can cache the `users/bio` partial once and replace the content we nee
 ```
 
 ```haml
-= render_cached 'users/bio', replace: {bio: user.bio}
+= render_cached 'users/bio', replace: { bio: user.bio }
 ```
 
 #### Simpler cache keys
@@ -181,7 +190,7 @@ If the cached content is rarely retrieved, `cache_replace` can help:
 ```
 
 ```haml
-= render 'common_interests', replace: {something: 'common_interests/inner'}
+= render 'common_interests', replace: { something: 'common_interests/inner' }
 ```
 
 #### Faster first page loads
