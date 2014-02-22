@@ -12,18 +12,18 @@
 
 CacheRocket improves fragment caching efficiency in Rails. 
 CacheRocket allows caching more generic html fragments and allowing the contents of the cached fragments 
-to be replaced with dynamic content. 
-CacheRocket is a technique that may be used with other Rails caching strategies such as Russian Doll caching.
+to be replaced with dynamic content.
 
 ### Install
 
-Add this line to your Gemfile:
+Add the gem to your Gemfile:
 
 ```ruby
 gem 'cache_rocket'
 ```
 
-Add this line to a helper file, likely your ApplicationHelper:
+Include the CacheRocket module so your views can use the `render_cached` method.
+Most likely you would put this in your `ApplicationHelper`:
 
 ```ruby
 include CacheRocket
@@ -31,17 +31,19 @@ include CacheRocket
 
 ### Use
 
-This gem allows you to cache a fragment of html and replace inner html. You cache the donut and replace the donut hole.
+CacheRocket allows you to cache a fragment of html and replace inner html. 
+You inject dynamic content into a static, cached outer partial. 
+You cache the donut and replace the donut hole.
 
 Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM.
 For example:
 
 ##### file.html.haml:
 ```haml
-= render 'container'
+= render 'outer'
 ```
 
-##### _container.html.haml:
+##### _outer.html.haml:
 ```haml
 .lots
   .of
@@ -51,20 +53,20 @@ For example:
 
 ##### _inner.html.haml:
 ```haml
-= complicated_uncacheable_stuff
+= uncacheable_content
 ```
 
 In the scenario above, you can't cache anything. With `cache_rocket`, you can. Replace `render`
-with `render_cached` in `file`, specify the partial to replace in `container`, and cache `container`:
+with `render_cached` in `file`, specify the partial to replace in `outer`, and cache `outer`:
 
 ##### file.html.haml:
 ```haml
-= render_cached 'container', replace: 'inner'
+= render_cached 'outer', replace: 'inner'
 ```
 
-##### _container.html.haml:
+##### _outer.html.haml:
 ```haml
-- cache 'container' do
+- cache 'outer' do
   .lots
     .of
       .htmls
@@ -73,19 +75,19 @@ with `render_cached` in `file`, specify the partial to replace in `container`, a
 
 ##### _inner.html.haml:
 ``` haml
-= complicated_uncacheable_stuff
+= uncacheable_content
 ```
 
 In this example, you could remove the `_inner.html.haml` file altogether, like so:
 
 ##### file.html.haml:
 ```haml
-= render_cached 'container', replace: { inner: complicated_uncacheable_stuff }
+= render_cached 'outer', replace: { inner: uncacheable_content }
 ```
 
-##### _container.html.haml:
+##### _outer.html.haml:
 ```haml
-- cache 'container' do
+- cache 'outer' do
   .lots
     .of
       .htmls
@@ -99,43 +101,53 @@ In this example, you could remove the `_inner.html.haml` file altogether, like s
 #### Single partial to replace
 
 ```ruby
-render_cached 'container', replace: 'inner'
+render_cached 'outer', replace: 'inner'
 ```
 
 #### Array of partials to replace
 ```ruby
-render_cached 'container', replace: ['inner', 'footer']
+render_cached 'outer', replace: ['inner', 'footer']
 ```
 
 #### Hash of keys to replace with values
 ```ruby
-render_cached 'container', replace: { key_name: a_helper_method(object) }
+render_cached 'outer', replace: { key_name: a_helper_method(object) }
 ```
 
 #### Block containing a hash of keys to replace with values
 ```ruby
-render_cached 'container' do
+render_cached 'outer' do
   { key_name: a_helper_method(object) }
 end
 ```
 
 #### Render a collection with hash of keys, using a Proc for each collection item
 ```ruby
-render_cached 'container', collection: objects,
-  replace: { key_name: ->(object){ a_helper_method(object) } }
+render_cached 'outer', collection: objects,
+  replace: { key_name: ->(object) { a_helper_method(object) } }
 ```
 
 #### Render a collection with block syntax
 ```ruby
-render_cached 'container', collection: objects do
-  { key_name: ->(object){ a_helper_method(object) } }
+render_cached 'outer', collection: objects do
+  { key_name: ->(object) { a_helper_method(object) } }
+end
+```
+
+#### Render a collection with block syntax with multiple keys
+```ruby
+render_cached 'outer', collection: objects do
+  { 
+    key_1: ->(object) { a_helper_method(object) },
+    key_2: ->(item) { item.name },
+  }
 end
 ```
 
 ### YMMV
 
 `cache_rocket` is not magic. It should not be used in all situations.
-Benchmark your page load times before and after to see if it helps.
+Benchmark your page rendering times before and after to see if it helps.
 
 ### Benefits
 
