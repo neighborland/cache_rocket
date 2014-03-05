@@ -1,9 +1,9 @@
-[![Gem Version](https://badge.fury.io/rb/cache_rocket.png)][gem]
-[![Build Status](https://api.travis-ci.org/neighborland/cache_rocket.png)][build]
-[![Coverage Status](https://coveralls.io/repos/neighborland/cache_rocket/badge.png)][coverage]
-[![Code Climate](https://codeclimate.com/github/neighborland/cache_rocket.png)][climate]
+[![Gem Version](http://img.shields.io/gem/v/cache_rocket.svg)][gem]
+[![Build Status](http://img.shields.io/travis/neighborland/cache_rocket.svg)][build]
+[![Coverage Status](http://img.shields.io/coveralls/neighborland/cache_rocket.svg)][coverage]
+[![Code Climate](http://img.shields.io/codeclimate/github/neighborland/cache_rocket.svg)][climate]
 
-[gem]: http://badge.fury.io/rb/cache_rocket
+[gem]: http://rubygems.org/gems/cache_rocket
 [build]: https://travis-ci.org/neighborland/cache_rocket
 [coverage]: https://coveralls.io/r/neighborland/cache_rocket
 [climate]: https://codeclimate.com/github/neighborland/cache_rocket
