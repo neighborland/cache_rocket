@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-group :test do
 gem 'pry'
+
+if ENV['TRAVIS']
   gem 'coveralls', require: false
 end
 
