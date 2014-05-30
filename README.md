@@ -1,5 +1,5 @@
-[![Gem Version](http://img.shields.io/gem/v/cache_rocket.svg)][gem]
-[![Build Status](http://img.shields.io/travis/neighborland/cache_rocket.svg)][build]
+[![Gem Version](https://badge.fury.io/rb/cache_rocket.svg)][gem]
+[![Build Status](https://travis-ci.org/neighborland/cache_rocket.svg?branch=master)][build]
 [![Coverage Status](http://img.shields.io/coveralls/neighborland/cache_rocket.svg)][coverage]
 [![Code Climate](http://img.shields.io/codeclimate/github/neighborland/cache_rocket.svg)][climate]
 
