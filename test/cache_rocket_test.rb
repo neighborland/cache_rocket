@@ -94,7 +94,7 @@ class CacheRocketTest < MiniTest::Spec
       dogs = %w[Snoop Boo]
 
       rendered = @renderer.render_cached("partial", collection: dogs) do
-        { dog: -> (dog) { dog_name(dog) } }
+        { dog: ->(dog) { dog_name(dog) } }
       end
 
       assert_equal "Hi Snoop.Hi Boo.", rendered
