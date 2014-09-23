@@ -124,13 +124,13 @@ end
 #### Render a collection with hash of keys, using a Proc for each collection item
 ```ruby
 render_cached 'outer', collection: objects,
-  replace: { key_name: ->(object) { a_helper_method(object) } }
+  replace: { key_name: -> (object) { a_helper_method(object) } }
 ```
 
 #### Render a collection with block syntax
 ```ruby
 render_cached 'outer', collection: objects do
-  { key_name: ->(object) { a_helper_method(object) } }
+  { key_name: -> (object) { a_helper_method(object) } }
 end
 ```
 
@@ -138,8 +138,8 @@ end
 ```ruby
 render_cached 'outer', collection: objects do
   { 
-    key_1: ->(object) { a_helper_method(object) },
-    key_2: ->(item) { item.name },
+    key_1: -> (object) { a_helper_method(object) },
+    key_2: -> (item) { item.name },
   }
 end
 ```
@@ -202,7 +202,7 @@ If the cached content is rarely retrieved, `cache_replace` can help:
 ```
 
 ```haml
-= render 'common_interests', replace: { something: 'common_interests/inner' }
+= render_cached 'common_interests', replace: { something: 'common_interests/inner' }
 ```
 
 #### Faster first page loads
