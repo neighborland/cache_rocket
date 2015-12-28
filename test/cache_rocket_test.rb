@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class CacheRocketTest < MiniTest::Spec
   class FakeRenderer
@@ -81,7 +81,7 @@ class CacheRocketTest < MiniTest::Spec
         .returns "I like #{@renderer.cache_replace_key('beer')}, #{@renderer.cache_replace_key('beer')} and #{@renderer.cache_replace_key('food')}."
 
       assert_equal "I like stout, stout and chips.",
-        @renderer.render_cached("container", replace: { food: "chips", beer: 'stout' })
+        @renderer.render_cached("container", replace: { food: "chips", beer: "stout" })
     end
 
     it "replace collection with Proc in replace key" do

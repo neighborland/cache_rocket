@@ -1,13 +1,13 @@
-if ENV['TRAVIS']
-  require 'coveralls'
+if ENV["TRAVIS"]
+  require "coveralls"
   Coveralls.wear!
 end
 
-require 'minitest/autorun'
-require 'mocha/mini_test'
-require 'cache_rocket'
+require "minitest/autorun"
+require "mocha/mini_test"
+require "cache_rocket"
 
 begin
-  require 'pry'
+  require "pry"
 rescue LoadError
 end

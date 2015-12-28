@@ -49,12 +49,6 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'cache_rocket.gemspec'
 
-# Offense count: 26
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.

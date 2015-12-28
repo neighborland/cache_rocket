@@ -1,9 +1,9 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'pry'
+gem "pry"
 
-if ENV['TRAVIS']
-  gem 'coveralls', require: false
+if ENV["TRAVIS"]
+  gem "coveralls", require: false
 end
 
 gemspec

@@ -1,7 +1,7 @@
-require 'active_support/core_ext/string'
-require 'cache_rocket/key'
-require 'cache_rocket/fragment'
-require 'cache_rocket/version'
+require "active_support/core_ext/string"
+require "cache_rocket/key"
+require "cache_rocket/fragment"
+require "cache_rocket/version"
 
 module CacheRocket
   include Key

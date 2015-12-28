@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 module CacheRocket
   class KeyTest < MiniTest::Spec
