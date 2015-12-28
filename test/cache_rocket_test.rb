@@ -48,7 +48,7 @@ class CacheRocketTest < MiniTest::Spec
       @renderer.stubs(:render).with("other", {}).returns "high life"
 
       assert_equal "quinoa hoodie high life viral mustache.",
-        @renderer.render_cached("container", replace: ["inner", "other"])
+        @renderer.render_cached("container", replace: %w(inner other))
     end
 
     it "render with map of keys" do
