@@ -8,6 +8,5 @@ module CacheRocket
     def cache_replace_key(key)
       "#{CACHE_REPLACE_KEY_OPEN}#{key.to_s}>".html_safe
     end
-
   end
 end

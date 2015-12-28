@@ -24,7 +24,7 @@ module CacheRocket
       end
     end
 
-  private
+    private
 
     def replace_from_hash(hash)
       hash.each do |key, value|
@@ -51,6 +51,5 @@ module CacheRocket
 
       item_fragment
     end
-
   end
 end

@@ -31,12 +31,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 16
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-Style/AccessModifierIndentation:
-  EnforcedStyle: outdent
-
 # Offense count: 4
 # Configuration parameters: Exclude.
 Style/Documentation:
@@ -54,23 +48,6 @@ Style/Documentation:
 Style/EmptyLineBetweenDefs:
   Exclude:
     - 'test/cache_rocket_test.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Exclude:
-    - 'lib/cache_rocket/fragment.rb'
-    - 'test/fragment_test.rb'
-    - 'test/key_test.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'lib/cache_rocket.rb'
-    - 'lib/cache_rocket/key.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

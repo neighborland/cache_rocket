@@ -54,5 +54,4 @@ module CacheRocket
 
     fragment.to_s.html_safe
   end
-
 end

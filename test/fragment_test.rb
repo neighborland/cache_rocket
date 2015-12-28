@@ -35,6 +35,5 @@ module CacheRocket
           fragment.replace(replace_hash, collection)
       end
     end
-
   end
 end
