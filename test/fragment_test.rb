@@ -19,7 +19,7 @@ module CacheRocket
       it "replace cache keys from hash" do
         cr_key = Fragment.new(nil).cache_replace_key(:xx)
         fragment = Fragment.new("hey #{cr_key} hey.")
-        fragment.replace({xx: "yo"}, nil)
+        fragment.replace({ xx: "yo" }, nil)
         assert_equal "hey yo hey.", fragment.value
       end
 
@@ -27,7 +27,7 @@ module CacheRocket
         def last5(object)
           object.last(5)
         end
-        replace_hash = { something: ->(object){ last5(object)} }
+        replace_hash = { something: ->(object) { last5(object) } }
         collection = %w[xxTiger xxSkunk]
         cr_key = Fragment.new(nil).cache_replace_key(:something)
         fragment = Fragment.new("hey #{cr_key} hey.")

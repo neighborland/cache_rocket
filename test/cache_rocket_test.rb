@@ -6,6 +6,7 @@ class CacheRocketTest < MiniTest::Spec
   end
 
   def dog_name(dog) dog end
+
   def reverse(dog) dog.reverse end
 
   before do
@@ -76,7 +77,7 @@ class CacheRocketTest < MiniTest::Spec
         .returns "I like #{@renderer.cache_replace_key('beer')}, #{@renderer.cache_replace_key('beer')} and #{@renderer.cache_replace_key('food')}."
 
       assert_equal "I like stout, stout and chips.",
-        @renderer.render_cached("container", replace: {food: "chips", beer: 'stout'})
+        @renderer.render_cached("container", replace: { food: "chips", beer: 'stout' })
     end
 
     it "replace collection with Proc in replace key" do

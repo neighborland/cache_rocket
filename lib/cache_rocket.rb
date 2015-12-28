@@ -33,7 +33,7 @@ module CacheRocket
   #
   #   render_cached "partial", collection: objects, replace: { key_name: ->(object){a_method(object)} }
   #
-  def render_cached(partial, options={})
+  def render_cached(partial, options = {})
     replace_hash = options.delete(:replace)
     collection = options.delete(:collection)
 

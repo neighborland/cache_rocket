@@ -1,6 +1,6 @@
 module CacheRocket
   module Key
-    CACHE_REPLACE_KEY_OPEN  = '<cr '
+    CACHE_REPLACE_KEY_OPEN = '<cr '
 
     # string key containing the partial file name or placeholder key.
     # It is a tag that should never be returned to be rendered by the
