@@ -43,12 +43,6 @@ Style/IfUnlessModifier:
   Exclude:
     - 'Gemfile'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'lib/cache_rocket/fragment.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: AllowIfMethodIsEmpty.
