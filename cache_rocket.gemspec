@@ -10,8 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/neighborland/cache_rocket"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.test_files    = `git ls-files -- {test}/*`.split("\n")
+  spec.files         = Dir["lib/**/*.rb", "LICENSE.txt", "README.md"]
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = ">= 1.9.3"
