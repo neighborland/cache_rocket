@@ -7,10 +7,10 @@ module CacheRocket
   include Key
 
   ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."
-  
+
   # Supports 5 options:
   #
-  # 1. Single partial to replace. 
+  # 1. Single partial to replace.
   #    "inner" is the key name and "_inner.*" is the partial file name.
   #
   #   render_cached "container", replace: "inner"
@@ -43,7 +43,7 @@ module CacheRocket
     when Hash
       fragment.replace replace_hash, collection
     when NilClass
-      raise ArgumentError.new(ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
+      raise(ArgumentError, ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
       fragment.replace yield, collection
     else
       key_array = *replace_hash
