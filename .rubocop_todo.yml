@@ -45,12 +45,6 @@ Style/IfUnlessModifier:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/SpecialGlobalVars:
-  Exclude:
-    - 'cache_rocket.gemspec'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: WordRegex.
 Style/WordArray:
   MinSize: 2
