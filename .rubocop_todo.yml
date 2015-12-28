@@ -49,15 +49,6 @@ Style/IfUnlessModifier:
   Exclude:
     - 'Gemfile'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'cache_rocket.gemspec'
-    - 'test/cache_rocket_test.rb'
-    - 'test/fragment_test.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/RedundantSelf:
@@ -82,12 +73,6 @@ Style/SpecialGlobalVars:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
   Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/UnneededPercentQ:
-  Exclude:
-    - 'cache_rocket.gemspec'
 
 # Offense count: 1
 # Cop supports --auto-correct.

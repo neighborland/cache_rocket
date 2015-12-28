@@ -28,7 +28,7 @@ module CacheRocket
           object.last(5)
         end
         replace_hash = { something: ->(object) { last5(object) } }
-        collection = %w[xxTiger xxSkunk]
+        collection = %w(xxTiger xxSkunk)
         cr_key = Fragment.new(nil).cache_replace_key(:something)
         fragment = Fragment.new("hey #{cr_key} hey.")
         assert_equal "hey Tiger hey.hey Skunk hey.",

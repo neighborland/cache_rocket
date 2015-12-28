@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CacheRocket::VERSION
   spec.authors       = ["Tee Parham"]
   spec.email         = ["tee@neighborland.com"]
-  spec.description   = %q{Rails rendering extension for server-side html caching}
-  spec.summary       = %q{Rails rendering extension for server-side html caching}
+  spec.description   = 'Rails rendering extension for server-side html caching'
+  spec.summary       = 'Rails rendering extension for server-side html caching'
   spec.homepage      = "https://github.com/neighborland/cache_rocket"
   spec.license       = "MIT"
 

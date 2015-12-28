@@ -83,7 +83,7 @@ class CacheRocketTest < MiniTest::Spec
     it "replace collection with Proc in replace key" do
       @renderer.stubs(:render).with("partial", {})
         .returns "Hi #{@renderer.cache_replace_key(:dog)}."
-      dogs = %w[Snoop Boo]
+      dogs = %w(Snoop Boo)
 
       assert_equal "Hi Snoop.Hi Boo.",
         @renderer.render_cached("partial", collection: dogs, replace: { dog: ->(dog) { dog_name(dog) } })
@@ -92,7 +92,7 @@ class CacheRocketTest < MiniTest::Spec
     it "replace collection using hash block with Proc" do
       @renderer.stubs(:render).with("partial", {})
         .returns "Hi #{@renderer.cache_replace_key(:dog)}."
-      dogs = %w[Snoop Boo]
+      dogs = %w(Snoop Boo)
 
       rendered = @renderer.render_cached("partial", collection: dogs) do
         { dog: ->(dog) { dog_name(dog) } }
@@ -104,7 +104,7 @@ class CacheRocketTest < MiniTest::Spec
     it "replace collection with multiple procs" do
       @renderer.stubs(:render).with("partial", {})
         .returns "#{@renderer.cache_replace_key(:reverse)} #{@renderer.cache_replace_key(:dog)}."
-      dogs = %w[Snoop Boo]
+      dogs = %w(Snoop Boo)
 
       rendered = @renderer.render_cached("partial", collection: dogs) do
         { dog: ->(dog) { dog_name(dog) }, reverse: ->(dog) { reverse(dog) } }
