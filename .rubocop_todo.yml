@@ -43,13 +43,6 @@ Style/IfUnlessModifier:
   Exclude:
     - 'Gemfile'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowIfMethodIsEmpty.
-Style/SingleLineMethods:
-  Exclude:
-    - 'test/cache_rocket_test.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/SpecialGlobalVars:

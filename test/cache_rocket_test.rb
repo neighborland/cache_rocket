@@ -5,9 +5,13 @@ class CacheRocketTest < MiniTest::Spec
     include CacheRocket
   end
 
-  def dog_name(dog) dog end
+  def dog_name(dog)
+    dog
+  end
 
-  def reverse(dog) dog.reverse end
+  def reverse(dog)
+    dog.reverse
+  end
 
   before do
     @renderer = FakeRenderer.new
