@@ -46,8 +46,7 @@ module CacheRocket
       raise(ArgumentError, ERROR_MISSING_KEY_OR_BLOCK) unless block_given?
       fragment.replace yield, collection
     else
-      key_array = *replace_hash
-      key_array.each do |key|
+      [*replace_hash].each do |key|
         fragment.gsub! cache_replace_key(key), render(key, options)
       end
     end
