@@ -24,7 +24,7 @@ module CacheRocket
       end
     end
 
-  private
+    private
 
     def replace_from_hash(hash)
       hash.each do |key, value|
@@ -43,7 +43,7 @@ module CacheRocket
     end
 
     def replace_item_hash(item, hash)
-      item_fragment = self.value.dup
+      item_fragment = value.dup
 
       hash.each do |key, proc|
         item_fragment.gsub! cache_replace_key(key), proc.call(item)
@@ -51,6 +51,5 @@ module CacheRocket
 
       item_fragment
     end
-
   end
 end

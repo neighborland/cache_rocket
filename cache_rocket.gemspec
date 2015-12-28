@@ -1,15 +1,15 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cache_rocket/version'
+require "cache_rocket/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "cache_rocket"
   spec.version       = CacheRocket::VERSION
   spec.authors       = ["Tee Parham"]
   spec.email         = ["tee@neighborland.com"]
-  spec.description   = %q{Rails rendering extension for server-side html caching}
-  spec.summary       = %q{Rails rendering extension for server-side html caching}
+  spec.description   = "Rails rendering extension for server-side html caching"
+  spec.summary       = "Rails rendering extension for server-side html caching"
   spec.homepage      = "https://github.com/neighborland/cache_rocket"
   spec.license       = "MIT"
 
