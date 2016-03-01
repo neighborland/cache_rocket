@@ -78,7 +78,7 @@ with `render_cached` in `file`, specify the partial to replace in `outer`, and c
 = uncacheable_content
 ```
 
-In this example, you could remove the `_inner.html.haml` file altogether, like so:
+With the example above, you could also remove the `_inner.html.haml` file altogether, like so:
 
 ##### file.html.haml:
 ```haml
@@ -91,7 +91,7 @@ In this example, you could remove the `_inner.html.haml` file altogether, like s
   .lots
     .of
       .htmls
-        = cache_replace_key 'inner'
+        = cache_replace_key :inner
 ```
 
 ### Options
@@ -121,7 +121,7 @@ render_cached 'outer' do
 end
 ```
 
-#### Render a collection with hash of keys, using a Proc for each collection item
+#### Render a collection with hash of keys, using a lambda for each collection item
 ```ruby
 render_cached 'outer', collection: objects,
   replace: { key_name: -> (object) { a_helper_method(object) } }
