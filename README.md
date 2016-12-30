@@ -10,8 +10,8 @@
 
 ## Rails rendering extension for server-side html caching
 
-CacheRocket improves fragment caching efficiency in Rails. 
-CacheRocket allows caching more generic html fragments and allowing the contents of the cached fragments 
+CacheRocket improves server-side fragment caching efficiency in Rails.
+CacheRocket allows caching more generic html fragments and allows the contents of the cached fragments
 to be replaced with dynamic content.
 
 ### Install
@@ -31,8 +31,8 @@ include CacheRocket
 
 ### Use
 
-CacheRocket allows you to cache a fragment of html and replace inner html. 
-You inject dynamic content into a static, cached outer partial. 
+CacheRocket allows you to cache a fragment of html and replace inner html.
+You inject dynamic content into a static, cached outer partial.
 You cache the donut and replace the donut hole.
 
 Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM.
@@ -137,7 +137,7 @@ end
 #### Render a collection with block syntax with multiple keys
 ```ruby
 render_cached 'outer', collection: objects do
-  { 
+  {
     key_1: -> (object) { a_helper_method(object) },
     key_2: -> (item) { item.name },
   }
@@ -155,7 +155,7 @@ Benchmark your page rendering times before and after to see if it helps.
 
 See the example above.
 
-#### Use far less memory
+#### More efficient memory usage
 
 Typically, one would key the `users/bio` partial on the `user` object like so:
 
