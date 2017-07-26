@@ -20,6 +20,7 @@ module CacheRocket
       else
         replace_from_hash hash
       end
+      self
     end
 
     private

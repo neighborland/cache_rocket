@@ -3,6 +3,13 @@ require "test_helper"
 class CacheRocketTest < MiniTest::Spec
   class FakeRenderer
     include CacheRocket
+
+    attr_accessor :html
+
+    def safe_concat(value)
+      @html ||= ""
+      @html += value
+    end
   end
 
   def dog_name(dog)
@@ -121,6 +128,28 @@ class CacheRocketTest < MiniTest::Spec
       assert_raises(ArgumentError) do
         @renderer.render_cached("container")
       end
+    end
+  end
+
+  describe "#cache_replace" do
+    it "raise if missing replace option" do
+      assert_raises(ArgumentError) do
+        @renderer.cache_replace("x")
+      end
+    end
+
+    it "replaces key in content" do
+      @renderer.stubs :cache_fragment_name
+      @renderer.stubs fragment_for: "Hello <crk xyz>."
+      assert_nil @renderer.cache_replace("abc", replace: { xyz: "there" }) {}
+      assert_equal "Hello there.", @renderer.html
+    end
+
+    it "replaces keys in content" do
+      @renderer.stubs :cache_fragment_name
+      @renderer.stubs fragment_for: "Hello <crk xx>. <crk yy>."
+      assert_nil @renderer.cache_replace([0], replace: { xx: "1", yy: "2" }) {}
+      assert_equal "Hello 1. 2.", @renderer.html
     end
   end
 end

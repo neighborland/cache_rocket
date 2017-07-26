@@ -8,6 +8,6 @@ require "mocha/mini_test"
 require "cache_rocket"
 
 begin
-  require "pry"
+  require "pry-byebug"
 rescue LoadError
 end

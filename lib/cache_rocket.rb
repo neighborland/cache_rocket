@@ -7,6 +7,7 @@ module CacheRocket
   include Key
 
   ERROR_MISSING_KEY_OR_BLOCK = "You must either pass a `replace` key or a block to render_cached."
+  ERROR_MISSING_KEY = "You must pass a `replace` key to cache_replace."
 
   # Supports 5 options:
   #
@@ -52,5 +53,27 @@ module CacheRocket
     end
 
     fragment.to_s.html_safe
+  end
+
+  # This method works like Rails' CacheHelper#cache,
+  # plus it replaces content in the replace hash.
+  # It must have a `replace` option.
+  #
+  # - cache_replace(["key1", "key2"], replace: { name: "x" }) do
+  #   .htmls
+  #     = cache_replace_key :name
+  #
+  # https://github.com/rails/rails/blob/master/actionview/lib/action_view/helpers/cache_helper.rb
+  def cache_replace(name = {}, options = {}, &block)
+    replace_hash = options.delete(:replace)
+    raise(ArgumentError, ERROR_MISSING_KEY) unless replace_hash
+
+    name_options = options.slice(:skip_digest, :virtual_path)
+    safe_concat \
+      Fragment.new(
+        fragment_for(cache_fragment_name(name, name_options), options, &block)
+      ).replace(replace_hash, nil).to_s.html_safe
+
+    nil
   end
 end
