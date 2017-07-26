@@ -20,7 +20,7 @@ module CacheRocket
         cr_key = Fragment.new(nil).cache_replace_key(:xx)
         fragment = Fragment.new("hey #{cr_key} hey.")
         fragment.replace({ xx: "yo" }, nil)
-        assert_equal "hey yo hey.", fragment.value
+        assert_equal "hey yo hey.", fragment.to_s
       end
 
       it "replace collection with Proc" do

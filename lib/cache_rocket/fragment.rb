@@ -2,18 +2,16 @@ module CacheRocket
   class Fragment
     include Key
 
-    attr_accessor :value
-
     def initialize(value)
-      self.value = value
+      @value = value
     end
 
     def to_s
-      value
+      @value
     end
 
     def gsub!(key, value)
-      self.value.gsub! key, value
+      @value.gsub! key, value
     end
 
     def replace(hash, collection)
@@ -39,11 +37,11 @@ module CacheRocket
         html << replace_item_hash(item, replace_hash)
       end
 
-      self.value = html
+      @value = html
     end
 
     def replace_item_hash(item, hash)
-      item_fragment = value.dup
+      item_fragment = @value.dup
 
       hash.each do |key, proc|
         item_fragment.gsub! cache_replace_key(key), proc.call(item)
