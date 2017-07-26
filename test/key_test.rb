@@ -9,7 +9,7 @@ module CacheRocket
         end
 
         key = KeyFake.new
-        assert_equal CacheRocket::Key::CACHE_REPLACE_KEY_OPEN + "some/thing>", key.cache_replace_key("some/thing")
+        assert_equal "<crk some/thing>", key.cache_replace_key("some/thing")
       end
     end
   end

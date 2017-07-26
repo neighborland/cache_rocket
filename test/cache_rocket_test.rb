@@ -19,8 +19,7 @@ class CacheRocketTest < MiniTest::Spec
 
   describe "#cache_replace_key" do
     it "return key with prefix" do
-      assert_equal CacheRocket::CACHE_REPLACE_KEY_OPEN + "some/thing>",
-                   @renderer.cache_replace_key("some/thing")
+      assert_equal "<crk some/thing>", @renderer.cache_replace_key("some/thing")
     end
   end
 
