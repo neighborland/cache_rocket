@@ -14,7 +14,7 @@ CacheRocket improves server-side fragment caching efficiency in Rails.
 CacheRocket allows caching more generic html fragments and allows the contents of the cached fragments
 to be replaced with dynamic content.
 
-### Install
+## Install
 
 Add the gem to your Gemfile:
 
@@ -29,14 +29,47 @@ Most likely you would put this in your `ApplicationHelper`:
 include CacheRocket
 ```
 
-### Use
+## Use
 
 CacheRocket allows you to cache a fragment of html and replace inner html.
 You inject dynamic content into a static, cached outer partial.
-You cache the donut and replace the donut hole.
 
-Assume you have some html that you would like to cache, but cannot because of some uncacheable code nested in the DOM.
+### `cache_replace`
+
+The simplest usage is inline with the `cache_replace` helper. It works
+like Rails' `cache` method, plus it replaces content that you do not want
+to cache because it is impractical or inefficient.
+
 For example:
+
+#### Before
+
+```haml
+.htmls
+  = Time.now
+```
+
+#### After
+
+```haml
+- cache_replace("the-time", replace: { time: Time.now }) do
+  .htmls
+    = cache_replace_key :time
+```
+
+Now the fragment is cached once with a placeholder, and the time is always replaced when rendered.
+
+Obviously, the above example is contrived and would not result in any
+performance benefit. When the block of html you are rendering is large,
+caching can help.
+
+### `render_cached`
+
+`render_cached` has options to deal with partials and collections.
+Use it as a replacement for Rails' `render`, with `replace` options.
+For example:
+
+#### Before
 
 ##### file.html.haml:
 ```haml
@@ -51,7 +84,9 @@ For example:
       = Time.now
 ```
 
-In the scenario above, you can't cache anything. With `cache_rocket`, you can. Replace `render`
+#### After
+
+ Replace `render`
 with `render_cached` in `file`, specify the content to replace, and cache `outer`:
 
 ##### file.html.haml:
@@ -68,7 +103,9 @@ with `render_cached` in `file`, specify the content to replace, and cache `outer
         = cache_replace_key :inner
 ```
 
-Here is a similar example, this time with partials:
+Here is the same example with an inner partial:
+
+#### Before
 
 ##### file.html.haml:
 ```haml
@@ -87,6 +124,8 @@ Here is a similar example, this time with partials:
 ```haml
 = Time.now
 ```
+
+#### After
 
 Replace `render` with `render_cached` in `file`,
 specify the partial to replace in `outer`, and cache `outer`:
@@ -121,16 +160,19 @@ render_cached 'outer', replace: 'inner'
 ```
 
 #### Array of partials to replace
+
 ```ruby
 render_cached 'outer', replace: ['inner', 'footer']
 ```
 
 #### Hash of keys to replace with values
+
 ```ruby
 render_cached 'outer', replace: { key_name: a_helper_method(object) }
 ```
 
 #### Block containing a hash of keys to replace with values
+
 ```ruby
 render_cached 'outer' do
   { key_name: a_helper_method(object) }
@@ -138,12 +180,14 @@ end
 ```
 
 #### Render a collection with hash of keys, using a lambda for each collection item
+
 ```ruby
 render_cached 'outer', collection: objects,
   replace: { key_name: -> (object) { a_helper_method(object) } }
 ```
 
 #### Render a collection with block syntax
+
 ```ruby
 render_cached 'outer', collection: objects do
   { key_name: -> (object) { a_helper_method(object) } }
@@ -151,6 +195,7 @@ end
 ```
 
 #### Render a collection with block syntax with multiple keys
+
 ```ruby
 render_cached 'outer', collection: objects do
   {
@@ -160,12 +205,12 @@ render_cached 'outer', collection: objects do
 end
 ```
 
-### YMMV
+## YMMV
 
 `cache_rocket` is not magic. It should not be used in all situations.
 Benchmark your page rendering times before and after to see if it helps.
 
-### Benefits
+## Benefits
 
 #### More server-side caching
 
@@ -175,41 +220,35 @@ See the example above.
 
 Typically, one would key the `users/bio` partial on the `user` object like so:
 
-##### users/bio.haml:
+##### users/bio.html.haml:
+
 ```haml
 - cache [user, 'bio'] do
   .lots-of-htmls
     = user.bio
 ```
 
-```haml
-= render 'users/bio'
-```
-
 With 1000 users, there are 1000 cached items. This can use a lot of memory.
 Instead we can cache the `users/bio` partial once and replace the content we need using
 `cache_replace`. With 1000 users, we use 1/1000th the memory.
 
-##### users/bio.haml:
+##### users/bio.html.haml:
 ```haml
-- cache('users/bio') do
+- cache_replace('users/bio', replace: { bio: user.bio }) do
   .lots-of-htmls
     = cache_replace_key :bio
-```
-
-```haml
-= render_cached 'users/bio', replace: { bio: user.bio }
 ```
 
 #### Simpler cache keys
 
 If you have a cache key containing multiple models, it will generally be very inefficient:
+
 ```haml
 - cache(user, other_user) do
   = render 'common_interests'
 ```
 
-If the cached content is rarely retrieved, `cache_replace` can help:
+If the cached content is rarely retrieved, `render_cached` can help:
 
 ```haml
 - cache('common_interests') do
