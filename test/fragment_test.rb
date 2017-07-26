@@ -32,7 +32,7 @@ module CacheRocket
         cr_key = Fragment.new(nil).cache_replace_key(:something)
         fragment = Fragment.new("hey #{cr_key} hey.")
         assert_equal "hey Tiger hey.hey Skunk hey.",
-          fragment.replace(replace_hash, collection)
+          fragment.replace(replace_hash, collection).to_s
       end
     end
   end
