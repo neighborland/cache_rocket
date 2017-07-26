@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/string"
 require "cache_rocket/key"
 require "cache_rocket/fragment"

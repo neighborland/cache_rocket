@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CacheRocket
   class Fragment
     include Key
@@ -35,7 +37,7 @@ module CacheRocket
       html = ""
 
       collection.each do |item|
-        html << replace_item_hash(item, replace_hash)
+        html += replace_item_hash(item, replace_hash)
       end
 
       @value = html
