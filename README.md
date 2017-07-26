@@ -48,16 +48,48 @@ For example:
 .lots
   .of
     .htmls
+      = Time.now
+```
+
+In the scenario above, you can't cache anything. With `cache_rocket`, you can. Replace `render`
+with `render_cached` in `file`, specify the content to replace, and cache `outer`:
+
+##### file.html.haml:
+```haml
+= render_cached 'outer', replace: { inner: Time.now }
+```
+
+##### _outer.html.haml:
+```haml
+- cache 'outer' do
+  .lots
+    .of
+      .htmls
+        = cache_replace_key :inner
+```
+
+Here is a similar example, this time with partials:
+
+##### file.html.haml:
+```haml
+= render 'outer'
+```
+
+##### _outer.html.haml:
+```haml
+.lots
+  .of
+    .htmls
       = render 'inner'
 ```
 
 ##### _inner.html.haml:
 ```haml
-= uncacheable_content
+= Time.now
 ```
 
-In the scenario above, you can't cache anything. With `cache_rocket`, you can. Replace `render`
-with `render_cached` in `file`, specify the partial to replace in `outer`, and cache `outer`:
+Replace `render` with `render_cached` in `file`,
+specify the partial to replace in `outer`, and cache `outer`:
 
 ##### file.html.haml:
 ```haml
@@ -70,28 +102,12 @@ with `render_cached` in `file`, specify the partial to replace in `outer`, and c
   .lots
     .of
       .htmls
-        = cache_replace_key 'inner'
+        = cache_replace_key :inner
 ```
 
 ##### _inner.html.haml:
 ``` haml
-= uncacheable_content
-```
-
-With the example above, you could also remove the `_inner.html.haml` file altogether, like so:
-
-##### file.html.haml:
-```haml
-= render_cached 'outer', replace: { inner: uncacheable_content }
-```
-
-##### _outer.html.haml:
-```haml
-- cache 'outer' do
-  .lots
-    .of
-      .htmls
-        = cache_replace_key :inner
+= Time.now
 ```
 
 ### Options
