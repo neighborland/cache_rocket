@@ -22,7 +22,7 @@ Add the gem to your Gemfile:
 gem 'cache_rocket'
 ```
 
-Include the CacheRocket module so your views can use the `render_cached` method.
+Include the CacheRocket module so your views can use the `cache_replace` and `render_cached` methods.
 Most likely you would put this in your `ApplicationHelper`:
 
 ```ruby
