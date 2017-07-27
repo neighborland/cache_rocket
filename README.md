@@ -36,7 +36,7 @@ You inject dynamic content into a static, cached outer partial.
 
 ### `cache_replace`
 
-The simplest usage is inline with the `cache_replace` helper. It works
+The simplest usage is inline with the `cache_replace` method. It works
 like Rails' `cache` method, plus it replaces content that you do not want
 to cache because it is impractical or inefficient.
 
@@ -168,14 +168,14 @@ render_cached 'outer', replace: ['inner', 'footer']
 #### Hash of keys to replace with values
 
 ```ruby
-render_cached 'outer', replace: { key_name: a_helper_method(object) }
+render_cached 'outer', replace: { key_name: a_method(object) }
 ```
 
 #### Block containing a hash of keys to replace with values
 
 ```ruby
 render_cached 'outer' do
-  { key_name: a_helper_method(object) }
+  { key_name: a_method(object) }
 end
 ```
 
@@ -183,14 +183,14 @@ end
 
 ```ruby
 render_cached 'outer', collection: objects,
-  replace: { key_name: -> (object) { a_helper_method(object) } }
+  replace: { key_name: -> (object) { a_method(object) } }
 ```
 
 #### Render a collection with block syntax
 
 ```ruby
 render_cached 'outer', collection: objects do
-  { key_name: -> (object) { a_helper_method(object) } }
+  { key_name: -> (object) { a_method(object) } }
 end
 ```
 
@@ -199,7 +199,7 @@ end
 ```ruby
 render_cached 'outer', collection: objects do
   {
-    key_1: -> (object) { a_helper_method(object) },
+    key_1: -> (object) { a_method(object) },
     key_2: -> (item) { item.name },
   }
 end
