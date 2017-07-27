@@ -32,7 +32,7 @@ include CacheRocket
 ## Use
 
 CacheRocket allows you to cache a fragment of html and replace inner html.
-You inject dynamic content into a static, cached outer partial.
+You inject dynamic content into a cached fragment that contains a placeholder.
 
 ### `cache_replace`
 
@@ -45,19 +45,24 @@ For example:
 #### Before
 
 ```haml
-.htmls
+.lots.of.htmls
   = Time.now
+.more.htmls
+  = user.name
 ```
 
 #### After
 
 ```haml
-- cache_replace("the-time", replace: { time: Time.now }) do
-  .htmls
+- cache_replace("some-key", replace: { time: Time.now, name: user.name }) do
+  .lots.of.htmls
     = cache_replace_key :time
+  .more.htmls
+    = cache_replace_key :name
 ```
 
-Now the fragment is cached once with a placeholder, and the time is always replaced when rendered.
+Now the fragment is cached once with placeholders, and the time and user name are 
+replaced when rendered.
 
 Obviously, the above example is contrived and would not result in any
 performance benefit. When the block of html you are rendering is large,
