@@ -5,7 +5,7 @@ module CacheRocket
     include Key
 
     def initialize(value)
-      @value = value
+      @value = value.to_s.dup
     end
 
     def to_s
