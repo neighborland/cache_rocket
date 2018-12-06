@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CacheRocket
   module Key
     # string key containing the partial file name or placeholder key.
