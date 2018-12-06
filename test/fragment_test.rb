@@ -37,8 +37,8 @@ module CacheRocket
 
       it "does not modify initialized value" do
         value = "Hi #{Fragment.new(nil).cache_replace_key(:x)}"
-        assert_equal "Hi 1", Fragment.new(value).replace({ x: "1"}, nil).to_s
-        assert_equal "Hi 2", Fragment.new(value).replace({ x: "2"}, nil).to_s
+        assert_equal "Hi 1", Fragment.new(value).replace({ x: "1" }, nil).to_s
+        assert_equal "Hi 2", Fragment.new(value).replace({ x: "2" }, nil).to_s
       end
     end
   end
