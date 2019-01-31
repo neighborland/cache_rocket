@@ -1,9 +1,6 @@
 source "https://rubygems.org"
 
-gem "pry-byebug"
-
-if ENV["TRAVIS"]
-  gem "coveralls", require: false
-end
+gem "pry-byebug" unless ENV["CI"]
+gem "coveralls", require: false if ENV["CI"]
 
 gemspec
