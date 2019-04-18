@@ -16,7 +16,7 @@ module CacheRocket
       @value.gsub! key, value
     end
 
-    def replace(hash, collection)
+    def replace(hash, collection = nil)
       if collection
         replace_collection collection, hash
       else
