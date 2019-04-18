@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class CacheRocketTest < MiniTest::Spec
+class CacheRocketTest < Minitest::Spec
   class FakeRenderer
     include CacheRocket
 

@@ -3,7 +3,7 @@
 require "test_helper"
 
 module CacheRocket
-  class FragmentTest < MiniTest::Spec
+  class FragmentTest < Minitest::Spec
     describe "#to_s" do
       it "equal value" do
         assert_equal "yo", Fragment.new("yo").to_s

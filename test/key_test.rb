@@ -3,7 +3,7 @@
 require "test_helper"
 
 module CacheRocket
-  class KeyTest < MiniTest::Spec
+  class KeyTest < Minitest::Spec
     describe "#cache_replace_key" do
       it "return key with prefix" do
         class KeyFake
