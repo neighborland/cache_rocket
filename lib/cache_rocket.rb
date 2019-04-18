@@ -74,7 +74,7 @@ module CacheRocket
     safe_concat \
       Fragment.new(
         fragment_for(cache_fragment_name(name, name_options), options, &block)
-      ).replace(replace_hash, nil).to_s.html_safe
+      ).replace(replace_hash).to_s.html_safe
 
     nil
   end

@@ -21,7 +21,7 @@ module CacheRocket
       it "replace cache keys from hash" do
         cr_key = Fragment.new(nil).cache_replace_key(:xx)
         fragment = Fragment.new("hey #{cr_key} hey.")
-        fragment.replace({ xx: "yo" }, nil)
+        fragment.replace(xx: "yo")
         assert_equal "hey yo hey.", fragment.to_s
       end
 
@@ -39,8 +39,8 @@ module CacheRocket
 
       it "does not modify initialized value" do
         value = "Hi #{Fragment.new(nil).cache_replace_key(:x)}"
-        assert_equal "Hi 1", Fragment.new(value).replace({ x: "1" }, nil).to_s
-        assert_equal "Hi 2", Fragment.new(value).replace({ x: "2" }, nil).to_s
+        assert_equal "Hi 1", Fragment.new(value).replace(x: "1").to_s
+        assert_equal "Hi 2", Fragment.new(value).replace(x: "2").to_s
       end
     end
   end
